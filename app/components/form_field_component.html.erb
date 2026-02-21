@@ -1,0 +1,15 @@
+<div class="flex flex-col justify-center items-center">
+  <%= @form.label @field, @label, class: "block text-sm font-medium text-gray-700 mb-1" %>
+  <% if @as == :text_area %>
+    <%= @form.text_area @field, { rows: 4, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2 resize-none" }.merge(@options) %>
+  <% elsif @as == :number_field %>
+    <%= @form.number_field @field, { step: 0.01, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2" }.merge(@options) %>
+  <% elsif @as == :file_field %>
+    <%= @form.file_field @field, { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2 hover:cursor-pointer" }.merge(@options) %>
+  <% else %>
+    <%= @form.text_field @field, { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2" }.merge(@options) %>
+  <% end %>
+  <% if @form.object.errors[@field].any? %>
+    <div class="text-red-600 text-xs mt-1"><%= @form.object.errors[@field].first %></div>
+  <% end %>
+</div>

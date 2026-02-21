@@ -1,0 +1,9 @@
+<%= form_with(model: product, class: "space-y-4") do |form| %>
+  <%= render(FormFieldComponent.new(form: form, field: :title, label: "Title", as: :text_field)) %>
+  <%= render(FormFieldComponent.new(form: form, field: :description, label: "Description", as: :text_area)) %>
+  <%= render(FormFieldComponent.new(form: form, field: :price, label: "Price", as: :number_field)) %>
+  <%= render(FormFieldComponent.new(form: form, field: :photo, label: "Photo", as: :file_field)) %>
+  <div class="flex justify-end">
+    <%= form.submit "Save", class: "px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:cursor-pointer" %>
+    <%= link_to "All Products", products_path, class: "ml-4 px-6 py-2 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" %>
+<% end %>

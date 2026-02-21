@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vendelo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <%= render "shared/header" %>
+  <body>
+    <% if flash[:notice] %>
+      <div id="toast" class="fixed top-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-500 z-50">
+        <%= flash[:notice] %>
+      </div>
+      <script>
+        setTimeout(function() {
+          var toast = document.getElementById('toast');
+          if (toast) toast.style.opacity = '0';
+        }, 2500);
+      </script>
+    <% end %>
+    <main class="flex items-center justify-center px-5 mt-12">
+      <%= yield %>
+    </main>
+  </body>
