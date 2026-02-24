@@ -1,9 +1,20 @@
-<%= form_with(model: product, class: "space-y-4") do |form| %>
+<%= form_with(model: product, class: "space-y-4" ,data: { controller: "photo-validation", photo_validation_has_photo_value: product.photo.attached? }) do |form| %>
   <%= render(FormFieldComponent.new(form: form, field: :title, label: "Title", as: :text_field)) %>
   <%= render(FormFieldComponent.new(form: form, field: :description, label: "Description", as: :text_area)) %>
   <%= render(FormFieldComponent.new(form: form, field: :price, label: "Price", as: :number_field)) %>
-  <%= render(FormFieldComponent.new(form: form, field: :photo, label: "Photo", as: :file_field)) %>
+  <% if product.photo.attached? %>
+    <div class="flex justify-center items-center mb-4 border border-gray-300 rounded-lg p-4">
+      <%= image_tag product.display_photo, alt: product.title, class: "w-32 h-32 object-cover rounded" %>
+      <h2 class="ml-4">Current Photo: <span class="font-bold"><%= product.displayable_photo_name %></span></h2>
+    </div>
+  <% end %>
+  <%= render(FormFieldComponent.new(form: form, field: :photo, label: "Photo", as: :file_field, 
+  options: {
+    "data-photo-validation-target": "photoInput",
+    "data-action": "change->photo-validation#validatePhoto"
+  })) %>
+  <%= render(FormFieldComponent.new(form: form, field: :category_id, label: "Category", as: :select)) %>
   <div class="flex justify-end">
-    <%= form.submit "Save", class: "px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:cursor-pointer" %>
+    <%= form.submit "Save", "data-photo-validation-target": "saveButton", class: "px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:cursor-pointer" %>
     <%= link_to "All Products", products_path, class: "ml-4 px-6 py-2 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" %>
 <% end %>

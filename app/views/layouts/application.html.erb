@@ -9,10 +9,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <%= render "shared/header" %>
   <body>
+  <%= render "shared/header" %>
     <% if flash[:notice] %>
-      <div id="toast" class="fixed top-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-500 z-50">
+      <div id="toast" class="fixed top-20 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-500 z-50">
         <%= flash[:notice] %>
       </div>
       <script>
@@ -26,3 +26,4 @@
       <%= yield %>
     </main>
   </body>
+</html>

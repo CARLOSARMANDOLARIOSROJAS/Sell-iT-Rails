@@ -1,12 +1,19 @@
 class ProductsController < ApplicationController
 
   def index
-    products = Product.all
+    @categories = Category.order(name: :asc)
+    if params[:category_id] || params[:id]
+      category_id = params[:category_id] || params[:id]
+      @category = Category.find(category_id)
+      products = @category.products.with_attached_photo.order(created_at: :desc)
+    else
+      products = Product.all.with_attached_photo.order(created_at: :desc)
+    end
     render :index, locals: { products: products }
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
+    product
   end
 
   def new
@@ -14,13 +21,12 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
+      product
   end
 
   def update
-    @product = Product.find(params[:id])
-    if @product.update(product_params)
-      flash[:notice] = "Producto actualizado correctamente"
+    if product.update(product_params)
+      flash[:notice] = "Product updated successfully"
       redirect_to products_path
     else
       render :edit, status: :unprocessable_entity
@@ -30,7 +36,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
       if @product.save
-        flash[:notice] = "Producto creado correctamente"
+        flash[:notice] = "Product created successfully"
         redirect_to products_path
       else
       render :new, status: :unprocessable_entity
@@ -38,15 +44,19 @@ class ProductsController < ApplicationController
   end
 
   def destroy 
-    @product = Product.find(params[:id])
-    @product.destroy
+    product.destroy
+    flash[:notice] = "Product deleted successfully"
     redirect_to products_path, status: :see_other
-    flash[:notice] = "Producto eliminado correctamente"
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :photo)
+    params.require(:product).permit(:title, :description, :price, :photo, :category_id)
   end
+
+  def product
+    @product ||= Product.find(params[:id])
+  end
+
 end

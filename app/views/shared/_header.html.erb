@@ -1,10 +1,22 @@
 <header class="bg-white shadow-sm sticky top-0 z-40">
   <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight select-none">
-      Sell <span class="text-indigo-500">iT.</span>
+      <%= link_to products_path do %>
+        Sell <span class="text-indigo-500">iT.</span>
+      <% end %>
     </h1>
     <% unless controller.controller_name == "products" && action_name == "new" %>
-      <%= link_to "Nuevo", new_product_path, class: "ml-4 px-5 py-2 bg-indigo-500 text-white font-medium rounded-lg shadow-sm hover:bg-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2" %>
+    <div class="flex items-center justify-between">
+      <%= link_to "New", new_product_path, data: { turbo: false }, class: "ml-4 px-5 py-2 bg-indigo-500 text-white font-medium rounded-lg shadow-sm hover:bg-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 flex items-center" %>
+      <div class="relative group ml-4 flex items-center">
+        <%= link_to "Categories", categories_path, data: { turbo: false }, class: "px-5 py-2 bg-black text-white font-medium rounded-lg shadow-sm hover:bg-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 flex items-center" %>
+        <div class="absolute left-0 top-full w-48 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50">
+          <% @categories&.each do |category| %>
+            <%= link_to category.name, category_products_path(category), class: "block px-4 py-2 text-gray-700 hover:bg-indigo-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
     <% end %>
   </div>
 </header>

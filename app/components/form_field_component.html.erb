@@ -6,6 +6,8 @@
     <%= @form.number_field @field, { step: 0.01, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2" }.merge(@options) %>
   <% elsif @as == :file_field %>
     <%= @form.file_field @field, { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2 hover:cursor-pointer" }.merge(@options) %>
+  <% elsif @as == :select%>
+    <%= @form.collection_select @field, Category.all, :id, :name, { prompt: "Select a category" }, { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2" }.merge(@options) %>
   <% else %>
     <%= @form.text_field @field, { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2" }.merge(@options) %>
   <% end %>

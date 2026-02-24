@@ -1,0 +1,17 @@
+es:
+  common: "¿Estás seguro?"
+  products: 
+    index:
+      title: "Productos"
+      total: "Total: %{count} productos"
+      no_products: "No hay productos disponibles."
+    show:
+      price: "Precio: %{price}"
+      created_at: "Creado el %{date}"
+      back: "Volver a productos"
+    new:
+      title: "Nuevo Producto"
+      submit: "Crear Producto"
+    edit:
+      title: "Editar Producto"
+      submit: "Actualizar Producto"

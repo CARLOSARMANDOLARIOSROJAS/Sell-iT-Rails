@@ -4,8 +4,9 @@ one:
   title: PS4
   description: Great console
   price: 200
-
+  category: one
 two:
   title: Xbox
   description: Great console
   price: 100
+  category: one

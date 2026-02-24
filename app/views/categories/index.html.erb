@@ -1,0 +1,13 @@
+<% content_for :title, "Categories" %>
+<div class="w-full flex flex-col items-center">
+  <h1 class="text-4xl font-bold text-gray-800 mb-1">Categories</h1>
+  <h2 class="mb-6">Showing a total of <span class="font-bold"><%= categories.count %></span> categories</h2>
+  <%= link_to "New Category", new_category_path, class: "px-6 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mb-4" %>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <% categories.each do |category| %>
+      <li>
+        <%= render CategoryCardComponent.new(category: category) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -28,4 +28,19 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  common: "Are you sure?"
+  products: 
+    index:
+      title: "Products"
+      total: "Total: %{count} products"
+      no_products: "No products available."
+    show:
+      price: "Price: %{price}"
+      created_at: "Created at %{date}"
+      back: "Back to products"
+    new:
+      title: "New Product"
+      submit: "Create Product"
+    edit:
+      title: "Edit Product"
+      submit: "Update Product"

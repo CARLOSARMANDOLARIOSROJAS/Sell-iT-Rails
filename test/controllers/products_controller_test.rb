@@ -21,24 +21,25 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a new product' do
-    post products_path, params: { product: { title: 'New Product', description: 'New product description', price: 199.99 } }
+    post products_path, params: { product: { title: 'New Product', description: 'New product description', price: 199.99, category_id: categories(:one).id } }
     assert_response :redirect
   end
 
   test 'allows to update a product' do
     patch product_path(products(:one)), params: {
       product: {
-        price: 149.99
+        price: 149.99,
+        category_id: categories(:one).id
       }
     }
     assert_redirected_to products_path
-    assert_equal flash[:notice], "Producto actualizado correctamente"
+    assert_equal flash[:notice], "Product updated successfully"
   end
 
   test 'allows to delete a product' do
     delete product_path(products(:one))
     assert_redirected_to products_path
-    assert_equal flash[:notice], "Producto eliminado correctamente"
+    assert_equal flash[:notice], "Product deleted successfully"
   end
 
 end
